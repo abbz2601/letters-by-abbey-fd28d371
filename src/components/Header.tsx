@@ -149,18 +149,6 @@ export default function Header() {
         )}
       </header>
 
-      <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          animation: marquee 35s linear infinite;
-        }
-        .pause {
-          animation-play-state: paused;
-        }
-      `}</style>
     </div>
   );
 }
