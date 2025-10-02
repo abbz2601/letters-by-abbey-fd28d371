@@ -103,7 +103,7 @@ export default function CollectionDetail() {
                 {collection.name}
               </h1>
 
-              <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center gap-4 mb-2">
                 <p className="font-playfair-display text-3xl text-foreground">
                   ${parseFloat(collection.price).toFixed(2)}
                 </p>
@@ -112,13 +112,30 @@ export default function CollectionDetail() {
                 </p>
               </div>
 
+              {/* Scarcity Indicator */}
+              <p className="font-crimson-text text-sm text-primary mb-6">
+                ✓ In stock • Ships within 24 hours
+              </p>
+
               {collection.description && (
-                <div className="mb-8">
+                <div className="mb-6">
                   <p className="font-crimson-text text-lg text-foreground leading-relaxed">
                     {collection.description}
                   </p>
                 </div>
               )}
+
+              {/* Why Customers Love This */}
+              <div className="bg-muted/50 p-6 mb-8 border-l-4 border-primary">
+                <h3 className="font-crimson-text font-semibold text-base text-foreground mb-3">
+                  Why customers love this collection
+                </h3>
+                <ul className="space-y-2 font-crimson-text text-base text-muted-foreground">
+                  <li>✓ Handwritten with intention and care</li>
+                  <li>✓ Arrives at the perfect moment</li>
+                  <li>✓ A keepsake to treasure forever</li>
+                </ul>
+              </div>
 
               <div className="mb-8">
                 <ShopifyBuyButton 
@@ -126,22 +143,52 @@ export default function CollectionDetail() {
                   containerId={`product-${collection.slug}`}
                 />
                 <p className="font-crimson-text text-sm text-muted-foreground text-center md:text-left mt-3">
-                  Secure checkout with Shopify
+                  🔒 Secure checkout with Shopify
                 </p>
               </div>
 
               <TrustBadges />
 
-              <div className="border-t border-muted pt-8">
+              {/* What's Included */}
+              <div className="border-t border-muted pt-8 mb-8">
                 <h3 className="font-crimson-text font-semibold text-sm uppercase tracking-wide text-foreground mb-4">
                   What's Included
                 </h3>
-                <ul className="space-y-2 font-crimson-text text-base text-muted-foreground">
-                  <li>• One beautifully handwritten custom letter</li>
-                  <li>• Premium quality paper and envelope</li>
-                  <li>• Thoughtful packaging with love</li>
-                  <li>• Perfect for gifting or personal keepsake</li>
+                <ul className="space-y-3 font-crimson-text text-base text-muted-foreground">
+                  <li className="flex items-start gap-3">
+                    <span className="text-primary">✓</span>
+                    <span>One beautifully handwritten custom letter</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-primary">✓</span>
+                    <span>Premium quality paper and envelope</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-primary">✓</span>
+                    <span>Thoughtful packaging with love</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-primary">✓</span>
+                    <span>Free shipping on all orders</span>
+                  </li>
                 </ul>
+              </div>
+
+              {/* Perfect for Gifting */}
+              <div className="bg-secondary/10 p-6 border border-secondary/20">
+                <h3 className="font-playfair-display text-xl text-foreground mb-2 italic">
+                  Perfect for gifting
+                </h3>
+                <p className="font-crimson-text text-base text-muted-foreground">
+                  Give the gift of meaningful words. Each letter is crafted to bring comfort, joy, and connection—a gift that will be treasured long after it's received.
+                </p>
+              </div>
+
+              {/* Abbey's Promise */}
+              <div className="mt-8 pt-8 border-t border-muted">
+                <p className="font-crimson-text text-base text-muted-foreground italic leading-relaxed">
+                  "Every letter I write carries intention and love. Words outlast us—they comfort when we're gone and celebrate while we're here." — Abbey
+                </p>
               </div>
             </div>
           </div>

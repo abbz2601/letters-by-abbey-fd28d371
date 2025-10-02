@@ -14,6 +14,13 @@ export default function AboutSection() {
               </em>
             </h2>
 
+            {/* Pull Quote */}
+            <div className="mb-8 pl-6 border-l-4 border-primary">
+              <p className="font-playfair-display text-2xl md:text-3xl text-foreground italic leading-relaxed">
+                "Words outlast us. They comfort when we're gone."
+              </p>
+            </div>
+
             <div className="space-y-6 font-crimson-text text-lg md:text-xl text-muted-foreground leading-relaxed">
               <p>
                 Letters by Abbey was born from a belief that in our digital
@@ -43,9 +50,9 @@ export default function AboutSection() {
 
               <Link
                 to="/about"
-                className="inline-flex items-center justify-center px-8 py-3 border-2 border-primary text-foreground hover:bg-primary hover:text-primary-foreground font-crimson-text text-lg uppercase tracking-wide transition-colors duration-200"
+                className="inline-flex items-center justify-center px-8 py-3 border-2 border-secondary text-secondary hover:bg-secondary hover:text-primary-foreground font-crimson-text text-lg uppercase tracking-wide transition-all duration-200 hover:scale-105"
               >
-                Read Our Story
+                Read Abbey's Story
               </Link>
             </div>
           </div>

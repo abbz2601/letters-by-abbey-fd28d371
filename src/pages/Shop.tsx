@@ -36,22 +36,30 @@ export default function Shop() {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-              {collections?.map((collection) => (
+              {collections?.map((collection, index) => (
                 <Link
                   key={collection.id}
                   to={`/shop/collections/${collection.slug}`}
-                  className="group cursor-pointer block"
+                  className="group cursor-pointer block animate-fade-in"
+                  style={{ animationDelay: `${index * 50}ms` }}
                 >
                   <div className="relative aspect-square mb-4 bg-muted overflow-hidden">
                     <img
                       src={collection.image_url_remote ?? collection.image_url}
                       alt={collection.name}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-300"></div>
+                    
+                    {/* Best Seller Badge */}
+                    {index === 0 && (
+                      <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-3 py-1 font-crimson-text text-xs uppercase tracking-wide">
+                        Best Seller
+                      </div>
+                    )}
                   </div>
-                  <div className="text-center">
-                    <h3 className="font-playfair-display text-xl md:text-2xl text-foreground mb-2 group-hover:text-secondary transition-colors">
+                  <div className="text-center transition-transform duration-200 group-hover:-translate-y-1">
+                    <h3 className="font-playfair-display text-xl md:text-2xl text-foreground mb-2 group-hover:text-primary transition-colors">
                       {collection.name}
                     </h3>
                     <p className="font-crimson-text text-base text-muted-foreground mb-3">
@@ -59,6 +67,9 @@ export default function Shop() {
                     </p>
                     <p className="font-crimson-text text-lg text-foreground font-semibold">
                       ${parseFloat(collection.price).toFixed(2)}
+                    </p>
+                    <p className="font-crimson-text text-sm text-muted-foreground mt-2">
+                      Ships within 24 hours
                     </p>
                   </div>
                 </Link>
