@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useCollection } from "@/hooks/useCollections";
 import { ArrowLeft } from "lucide-react";
 import ShopifyBuyButton from "@/components/ShopifyBuyButton";
+import TrustBadges from "@/components/TrustBadges";
 
 export default function CollectionDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -59,6 +60,22 @@ export default function CollectionDetail() {
 
   return (
     <div className="min-h-screen bg-background">
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org/",
+          "@type": "Product",
+          "name": collection.name,
+          "image": collection.image_url_remote ?? collection.image_url,
+          "description": collection.description,
+          "offers": {
+            "@type": "Offer",
+            "url": window.location.href,
+            "priceCurrency": "USD",
+            "price": collection.price,
+            "availability": "https://schema.org/InStock"
+          }
+        })}
+      </script>
       <div className="sticky top-0 z-50">
         <Header />
       </div>
@@ -112,6 +129,8 @@ export default function CollectionDetail() {
                   Secure checkout with Shopify
                 </p>
               </div>
+
+              <TrustBadges />
 
               <div className="border-t border-muted pt-8">
                 <h3 className="font-crimson-text font-semibold text-sm uppercase tracking-wide text-foreground mb-4">
