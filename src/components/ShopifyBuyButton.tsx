@@ -28,6 +28,9 @@ export default function ShopifyBuyButton({
       return;
     }
 
+    // Normalize product ID - strip GID prefix if present
+    const normalizedProductId = productId.replace(/^gid:\/\/shopify\/Product\//, "");
+
     const scriptURL = "https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js";
 
     const ShopifyBuyInit = () => {
@@ -46,7 +49,7 @@ export default function ShopifyBuyButton({
         window.ShopifyBuy.UI.onReady(client)
           .then(function (ui: any) {
             ui.createComponent("product", {
-              id: productId,
+              id: normalizedProductId,
               node: document.getElementById(containerId),
               moneyFormat: "${{amount}}",
               options: {

@@ -21,7 +21,7 @@ const COLLECTIONS: Collection[] = [
     image_url: "/images/collections/wedding-day.png",
     price: "35.00",
     letter_count: 1,
-    shopify_product_id: "gid://shopify/Product/8980688765181",
+    shopify_product_id: "8980688765181",
   },
   {
     id: "2",
@@ -31,7 +31,7 @@ const COLLECTIONS: Collection[] = [
     image_url: "/images/collections/finding-joy.png",
     price: "24.00",
     letter_count: 1,
-    shopify_product_id: "gid://shopify/Product/8980690141437",
+    shopify_product_id: "8980690141437",
   },
   {
     id: "3",
@@ -41,7 +41,7 @@ const COLLECTIONS: Collection[] = [
     image_url: "/images/collections/you-are-enough.png",
     price: "22.00",
     letter_count: 1,
-    shopify_product_id: "gid://shopify/Product/8980740079869",
+    shopify_product_id: "8980740079869",
   },
   {
     id: "4",
@@ -51,7 +51,7 @@ const COLLECTIONS: Collection[] = [
     image_url: "/images/collections/wishing-you-joy.png",
     price: "28.00",
     letter_count: 1,
-    shopify_product_id: "gid://shopify/Product/8980687257853",
+    shopify_product_id: "8980687257853",
   },
   {
     id: "5",
@@ -61,7 +61,7 @@ const COLLECTIONS: Collection[] = [
     image_url: "/images/collections/grief-support.png",
     price: "25.00",
     letter_count: 1,
-    shopify_product_id: "gid://shopify/Product/8980685029629",
+    shopify_product_id: "8980685029629",
   },
   {
     id: "6",
@@ -71,7 +71,7 @@ const COLLECTIONS: Collection[] = [
     image_url: "/images/collections/reflections-season.png",
     price: "30.00",
     letter_count: 1,
-    shopify_product_id: "gid://shopify/Product/8980691222781",
+    shopify_product_id: "8980691222781",
   },
 ];
 
