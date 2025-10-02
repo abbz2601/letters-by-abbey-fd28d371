@@ -1,0 +1,28 @@
+{
+  "name": "letters-by-abbey",
+  "version": "1.0.0",
+  "description": "Beautiful handwritten letters by Abbey",
+  "scripts": {
+    "dev": "cd _/apps/web && npm run dev",
+    "build": "cd _/apps/web && npm run build", 
+    "start": "cd _/apps/web && npm start",
+    "install:all": "cd _/apps/web && npm install"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abbz2601/Letters-by-Abbey.git"
+  },
+  "author": "Abbey",
+  "license": "MIT",
+  "keywords": [
+    "handwritten",
+    "letters",
+    "custom",
+    "shopify",
+    "react",
+    "create.xyz"
+  ]
+}

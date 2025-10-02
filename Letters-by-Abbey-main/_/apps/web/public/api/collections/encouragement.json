@@ -1,0 +1,31 @@
+{
+  "id": "3",
+  "name": "Encouragement Letters",
+  "slug": "encouragement",
+  "description": "Uplifting letters for difficult times. These letters provide comfort, hope, and strength when you need it most.",
+  "image_url": "/images/encouragement-collection.jpg",
+  "price": "23.00",
+  "price_range": "$18 - $28",
+  "letter_count": 6,
+  "letters": [
+    {
+      "id": "encouragement-1",
+      "title": "Strength & Hope Letter",
+      "description": "A letter to remind you of your inner strength",
+      "image_url": "/images/encouragement-letter-1.jpg", 
+      "price": "22.00",
+      "sample_text": "In times of uncertainty...",
+      "available": true
+    },
+    {
+      "id": "encouragement-2", 
+      "title": "You Are Enough Letter",
+      "description": "A gentle reminder of your worth",
+      "image_url": "/images/encouragement-letter-2.jpg",
+      "price": "23.00", 
+      "sample_text": "I want you to know...",
+      "available": true
+    }
+  ],
+  "shopify_product_id": "gid://shopify/Product/123456791"
+}
