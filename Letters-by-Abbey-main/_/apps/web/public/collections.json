@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "name": "Love Letters",
+    "slug": "love-letters", 
+    "description": "Heartfelt letters expressing love and affection",
+    "image_url": "/images/love-collection.jpg",
+    "price": "25.00",
+    "price_range": "$20 - $35",
+    "letter_count": 5
+  },
+  {
+    "id": "2", 
+    "name": "Gratitude Collection",
+    "slug": "gratitude",
+    "description": "Letters expressing heartfelt appreciation", 
+    "image_url": "/images/gratitude-collection.jpg",
+    "price": "22.00",
+    "price_range": "$15 - $30",
+    "letter_count": 4
+  },
+  {
+    "id": "3",
+    "name": "Encouragement Letters", 
+    "slug": "encouragement",
+    "description": "Uplifting letters for difficult times",
+    "image_url": "/images/encouragement-collection.jpg",
+    "price": "23.00", 
+    "price_range": "$18 - $28",
+    "letter_count": 6
+  }
+]

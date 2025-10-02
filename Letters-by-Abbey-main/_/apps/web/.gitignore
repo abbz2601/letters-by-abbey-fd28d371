@@ -1,0 +1,19 @@
+.DS_Store
+/node_modules/
+
+# React Router
+/.react-router/
+/build/
+
+# Test files and configs
+/test/
+vitest.config.ts
+**/vitest.config.ts
+
+# Cache files
+.metro-cache/
+metro-file-map-*
+
+# Build artifacts
+/dist/
+/build/
