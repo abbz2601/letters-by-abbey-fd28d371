@@ -44,7 +44,7 @@ export default function Shop() {
                 >
                   <div className="relative aspect-square mb-4 bg-muted overflow-hidden">
                     <img
-                      src={collection.image_url}
+                      src={collection.image_url_remote ?? collection.image_url}
                       alt={collection.name}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />

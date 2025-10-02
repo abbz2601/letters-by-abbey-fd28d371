@@ -74,7 +74,7 @@ export default function CollectionDetail() {
             {/* Collection Image */}
             <div className="relative aspect-square bg-muted overflow-hidden">
               <img
-                src={collection.image_url}
+                src={collection.image_url_remote ?? collection.image_url}
                 alt={collection.name}
                 className="w-full h-full object-cover"
               />

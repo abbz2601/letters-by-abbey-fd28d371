@@ -6,6 +6,7 @@ export interface Collection {
   slug: string;
   description: string;
   image_url: string;
+  image_url_remote?: string;
   price: string;
   letter_count?: number;
   shopify_product_id: string;
@@ -73,15 +74,58 @@ const COLLECTIONS: Collection[] = [
     letter_count: 1,
     shopify_product_id: "8980691222781",
   },
-];
+]; 
+
+// Shopify image fetch helper
+async function fetchShopifyImagesByIds(productGids: string[]) {
+  const domain = import.meta.env.VITE_SHOPIFY_DOMAIN as string | undefined;
+  const token = import.meta.env.VITE_SHOPIFY_STOREFRONT_ACCESS_TOKEN as string | undefined;
+  if (!domain || !token || productGids.length === 0) return {} as Record<string, { url?: string | null; altText?: string | null }>;
+  try {
+    const query = `
+      query($ids: [ID!]!) {
+        nodes(ids: $ids) {
+          ... on Product {
+            id
+            images(first: 1) { edges { node { url altText } } }
+          }
+        }
+      }
+    `;
+    const res = await fetch(`https://${domain}/api/2024-07/graphql.json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': token,
+      },
+      body: JSON.stringify({ query, variables: { ids: productGids } }),
+    });
+    if (!res.ok) throw new Error(`Shopify GraphQL error: ${res.status}`);
+    const json = await res.json();
+    const map: Record<string, { url?: string | null; altText?: string | null }> = {};
+    json?.data?.nodes?.forEach((node: any) => {
+      if (node?.id) {
+        const edge = node.images?.edges?.[0];
+        map[node.id] = { url: edge?.node?.url ?? null, altText: edge?.node?.altText ?? null };
+      }
+    });
+    return map;
+  } catch {
+    return {} as Record<string, { url?: string | null; altText?: string | null }>;
+  }
+}
 
 export function useCollections() {
   return useQuery({
     queryKey: ['collections'],
     queryFn: async () => {
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 300));
-      return COLLECTIONS;
+      const gids = COLLECTIONS.map(c => `gid://shopify/Product/${c.shopify_product_id}`);
+      const imageMap = await fetchShopifyImagesByIds(gids);
+      return COLLECTIONS.map(c => {
+        const gid = `gid://shopify/Product/${c.shopify_product_id}`;
+        const img = imageMap[gid];
+        return { ...c, image_url_remote: img?.url ?? undefined } as Collection;
+      });
     },
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
@@ -91,13 +135,14 @@ export function useCollection(slug: string) {
   return useQuery({
     queryKey: ['collection', slug],
     queryFn: async () => {
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 300));
-      const collection = COLLECTIONS.find(c => c.slug === slug);
-      if (!collection) {
+      const base = COLLECTIONS.find(c => c.slug === slug);
+      if (!base) {
         throw new Error('Collection not found');
       }
-      return collection;
+      const gid = `gid://shopify/Product/${base.shopify_product_id}`;
+      const imageMap = await fetchShopifyImagesByIds([gid]);
+      const img = imageMap[gid];
+      return { ...base, image_url_remote: img?.url ?? undefined } as Collection;
     },
     enabled: !!slug,
     staleTime: 1000 * 60 * 5, // 5 minutes
