@@ -1,34 +1,48 @@
 import { Link } from "react-router-dom";
-
-// Hardcoded featured collections
-const FEATURED_COLLECTIONS = [
-  {
-    id: "1",
-    name: "Love Letters",
-    slug: "love-letters",
-    description: "Heartfelt letters expressing love and affection",
-    image_url: "https://images.pexels.com/photos/6956627/pexels-photo-6956627.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop",
-    price: "25.00",
-  },
-  {
-    id: "2",
-    name: "Gratitude Collection",
-    slug: "gratitude",
-    description: "Letters expressing heartfelt appreciation",
-    image_url: "https://images.pexels.com/photos/6956629/pexels-photo-6956629.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop",
-    price: "22.00",
-  },
-  {
-    id: "3",
-    name: "Encouragement Letters",
-    slug: "encouragement",
-    description: "Uplifting letters for difficult times",
-    image_url: "https://images.pexels.com/photos/6956630/pexels-photo-6956630.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop",
-    price: "23.00",
-  },
-];
+import { useCollections } from "@/hooks/useCollections";
 
 export default function FeaturedCollections() {
+  const { data: collections, isLoading, error } = useCollections();
+
+  if (isLoading) {
+    return (
+      <section className="py-16 md:py-20 lg:py-24 bg-background">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="font-playfair-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-4">
+              <span className="italic">Thoughtfully</span> curated
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="animate-pulse">
+                <div className="aspect-square bg-muted mb-4"></div>
+                <div className="h-6 bg-muted mb-2 w-3/4 mx-auto"></div>
+                <div className="h-4 bg-muted mb-3 w-full"></div>
+                <div className="h-5 bg-muted w-1/4 mx-auto"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-16 md:py-20 lg:py-24 bg-background">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 text-center">
+          <h2 className="font-playfair-display text-4xl text-foreground mb-4">
+            <span className="italic">Something</span> went wrong
+          </h2>
+          <p className="font-crimson-text text-lg text-muted-foreground">
+            We're having trouble loading our collections. Please try again later.
+          </p>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="py-16 md:py-20 lg:py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
@@ -44,7 +58,7 @@ export default function FeaturedCollections() {
 
         {/* Collections Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
-          {FEATURED_COLLECTIONS.map((collection) => (
+          {collections?.slice(0, 3).map((collection) => (
             <Link
               key={collection.id}
               to={`/shop/collections/${collection.slug}`}

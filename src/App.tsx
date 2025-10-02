@@ -9,6 +9,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import Cart from "./pages/Cart";
+import CollectionDetail from "./pages/CollectionDetail";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Shipping from "./pages/Shipping";
@@ -26,6 +27,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/shop/collections/:slug" element={<CollectionDetail />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<FAQ />} />
