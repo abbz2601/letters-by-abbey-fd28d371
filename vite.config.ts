@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
   plugins: [
-    react(),
+    react({ fastRefresh: false }),
     mode === 'development' && componentTagger(),
   ].filter(Boolean),
   resolve: {
