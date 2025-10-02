@@ -15,20 +15,42 @@ export default function About() {
           </h1>
           
           <div className="space-y-6 font-crimson-text text-lg text-muted-foreground leading-relaxed">
-            <p>
-              Welcome to Letters by Abbey, where every word is written with intention and care.
-            </p>
+            <p>This began with a heartbreak I couldn't undo.</p>
             
             <p>
-              In a world of instant messages and fleeting texts, I believe in the power of the handwritten word. Each letter I craft is a labor of love, designed to create meaningful connections and lasting memories.
+              There was someone in my life I couldn't save — though I would have given anything to. 
+              In the silence that followed, I found myself clinging to his words. The things he had 
+              said to me — reminders of my worth, moments of laughter, quiet encouragement — became a lifeline.
             </p>
+            
+            <p>I learned something I can never forget: words outlast us.</p>
             
             <p>
-              Whether you're celebrating a milestone, offering encouragement, or simply want to let someone know they're in your thoughts, a handwritten letter carries a weight and warmth that digital communication simply can't match.
+              They comfort when we're gone. They carry love across distance. They remind us that we mattered.
             </p>
             
-            <p className="text-foreground font-semibold text-xl">
-              Every letter tells a story. Let me help you tell yours.
+            <p>That is why Letters by Abbey was born.</p>
+            
+            <p>
+              Every letter I create carries a piece of that truth — that even when we cannot change an outcome, 
+              we can leave behind words that heal, comfort, and stay.
+            </p>
+            
+            <p>So these are not just letters. They are little legacies.</p>
+            
+            <p>
+              For grief, for joy, for birthdays, for weddings, or for no reason at all. They are written with 
+              the same care I once received when I needed it most. They are sealed as a reminder: in a world 
+              that moves too fast, there is still space for love that lingers.
+            </p>
+            
+            <p>I couldn't save him.</p>
+            
+            <p>But through this work, I can honour him.</p>
+            
+            <p>
+              And I can give to others what was given to me — the right words, at the right time, to remind 
+              you that you are not alone.
             </p>
           </div>
         </div>

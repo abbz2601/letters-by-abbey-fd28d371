@@ -2,23 +2,12 @@ import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useCollection } from "@/hooks/useCollections";
-import { useCart } from "@/store/useCart";
-import { toast } from "sonner";
 import { ArrowLeft } from "lucide-react";
+import ShopifyBuyButton from "@/components/ShopifyBuyButton";
 
 export default function CollectionDetail() {
   const { slug } = useParams<{ slug: string }>();
   const { data: collection, isLoading, error } = useCollection(slug || '');
-  const addItem = useCart(state => state.addItem);
-
-  const handleAddToCart = () => {
-    if (collection) {
-      addItem(collection);
-      toast.success('Added to cart!', {
-        description: `${collection.name} has been added to your cart.`,
-      });
-    }
-  };
 
   if (isLoading) {
     return (
@@ -115,14 +104,12 @@ export default function CollectionDetail() {
               )}
 
               <div className="mb-8">
-                <button
-                  onClick={handleAddToCart}
-                  className="w-full md:w-auto px-8 py-3 bg-secondary hover:bg-secondary/90 text-white font-crimson-text text-lg uppercase tracking-wide transition-colors duration-200"
-                >
-                  Add to Cart - ${parseFloat(collection.price).toFixed(2)}
-                </button>
+                <ShopifyBuyButton 
+                  productId={collection.shopify_product_id} 
+                  containerId={`product-${collection.slug}`}
+                />
                 <p className="font-crimson-text text-sm text-muted-foreground text-center md:text-left mt-3">
-                  Handcrafted with love and intention
+                  Secure checkout with Shopify
                 </p>
               </div>
 

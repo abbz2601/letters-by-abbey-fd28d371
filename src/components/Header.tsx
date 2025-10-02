@@ -1,11 +1,9 @@
 import { Menu, ShoppingBag, Heart, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useCart } from "@/store/useCart";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const itemCount = useCart(state => state.getItemCount());
 
   return (
     <div className="w-full">
@@ -90,15 +88,8 @@ export default function Header() {
           </div>
 
           {/* Right zone - Cart */}
-          <Link to="/cart" className="flex items-center gap-2 group relative">
-            <div className="relative">
-              <ShoppingBag className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
-              {itemCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-secondary text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                  {itemCount}
-                </span>
-              )}
-            </div>
+          <Link to="/cart" className="flex items-center gap-2 group">
+            <ShoppingBag className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
             <span className="font-crimson-text text-foreground text-base uppercase tracking-wide group-hover:text-secondary transition-colors">
               CART
             </span>
