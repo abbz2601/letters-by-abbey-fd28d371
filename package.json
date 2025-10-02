@@ -35,7 +35,6 @@
 		"downshift": "^9.0.9",
 		"isbot": "^5.1.27",
 		"lodash-es": "^4.17.21",
-		"lovable-tagger": "^1.1.10",
 		"lucide-react": "0.358.0",
 		"motion": "^12.7.4",
 		"papaparse": "^5.5.2",

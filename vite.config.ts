@@ -4,7 +4,6 @@ import { reactRouterHonoServer } from 'react-router-hono-server/dev';
 import { defineConfig } from 'vite';
 import babel from 'vite-plugin-babel';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import { componentTagger } from 'lovable-tagger';
 import { addRenderIds } from './plugins/addRenderIds';
 import { aliases } from './plugins/aliases';
 import consoleToParent from './plugins/console-to-parent';
@@ -14,7 +13,7 @@ import { nextPublicProcessEnv } from './plugins/nextPublicProcessEnv';
 import { restart } from './plugins/restart';
 import { restartEnvFileChange } from './plugins/restartEnvFileChange';
 
-export default defineConfig(({ mode }) => ({
+export default defineConfig(() => ({
   // Keep them available via import.meta.env.NEXT_PUBLIC_*
   envPrefix: 'NEXT_PUBLIC_',
   optimizeDeps: {
@@ -66,8 +65,7 @@ export default defineConfig(({ mode }) => ({
     tsconfigPaths(),
     aliases(),
     layoutWrapperPlugin(),
-    mode === 'development' && componentTagger(),
-  ].filter(Boolean),
+  ],
   resolve: {
     alias: {
       lodash: 'lodash-es',
