@@ -12,7 +12,7 @@ export default function Header() {
       {/* Promo Ribbon */}
       <div className="bg-secondary h-10 overflow-hidden relative group">
         <div className="marquee-container h-full flex items-center">
-          <div className="marquee-content flex items-center whitespace-nowrap animate-marquee group-hover:pause">
+          <div className="marquee-content flex items-center whitespace-nowrap animate-marquee group-hover:[animation-play-state:paused]">
             {[...Array(10)].map((_, i) => (
               <div key={i} className="flex items-center">
                 <span className="text-primary-foreground font-crimson-text text-sm lg:text-sm uppercase tracking-wider opacity-90 px-8">

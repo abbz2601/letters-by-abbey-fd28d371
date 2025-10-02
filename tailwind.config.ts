@@ -96,5 +96,14 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    function ({ addUtilities }: any) {
+      addUtilities({
+        '.pause': {
+          'animation-play-state': 'paused',
+        },
+      })
+    },
+  ],
 } satisfies Config;
