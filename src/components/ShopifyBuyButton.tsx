@@ -35,7 +35,8 @@ export default function ShopifyBuyButton({
 
     const ShopifyBuyInit = () => {
       try {
-        if (typeof window.ShopifyBuy === "undefined") {
+        if (typeof window.ShopifyBuy === "undefined" || typeof window.ShopifyBuy.UI === "undefined") {
+          console.error("Shopify Buy SDK not loaded properly");
           setError("Shopify Buy SDK failed to load");
           setLoading(false);
           return;
@@ -46,101 +47,100 @@ export default function ShopifyBuyButton({
           storefrontAccessToken: storefrontAccessToken,
         });
 
-        window.ShopifyBuy.UI.onReady(client)
-          .then(function (ui: any) {
-            ui.createComponent("product", {
-              id: normalizedProductId,
-              node: document.getElementById(containerId),
-              moneyFormat: "${{amount}}",
-              options: {
-                product: {
-                  styles: {
-                    product: {
-                      "@media (min-width: 601px)": {
-                        "max-width": "100%",
-                        "margin-left": "0",
-                        "margin-bottom": "0",
-                      },
-                    },
-                    button: {
-                      ":hover": { "background-color": "#cf9591" },
-                      "background-color": "#E8A088",
-                      ":focus": { "background-color": "#cf9591" },
-                      "color": "#fff",
-                      "font-family": "Crimson Text, serif",
-                      "font-size": "16px",
-                      "padding": "12px 32px",
-                      "text-transform": "uppercase",
-                      "letter-spacing": "0.05em",
+        const container = document.getElementById(containerId);
+        if (!container) {
+          console.error("Container element not found:", containerId);
+          setError("Failed to initialize cart");
+          setLoading(false);
+          return;
+        }
+
+        window.ShopifyBuy.UI.onReady(client).then(function (ui: any) {
+          ui.createComponent("product", {
+            id: normalizedProductId,
+            node: container,
+            moneyFormat: "${{amount}}",
+            options: {
+              product: {
+                styles: {
+                  product: {
+                    "@media (min-width: 601px)": {
+                      "max-width": "100%",
+                      "margin-left": "0",
+                      "margin-bottom": "0",
                     },
                   },
-                  text: { button: "Add to Cart" },
-                  contents: {
-                    img: false,
-                    title: false,
-                    price: false,
-                  },
-                },
-                cart: {
-                  styles: {
-                    button: {
-                      ":hover": { "background-color": "#cf9591" },
-                      "background-color": "#E8A088",
-                      ":focus": { "background-color": "#cf9591" },
-                      "color": "#fff",
-                      "font-family": "Crimson Text, serif",
-                    },
-                  },
-                  text: { total: "Subtotal", button: "Checkout" },
-                },
-                toggle: {
-                  styles: {
-                    toggle: {
-                      "background-color": "#E8A088",
-                      ":hover": { "background-color": "#cf9591" },
-                      ":focus": { "background-color": "#cf9591" },
-                    },
+                  button: {
+                    ":hover": { "background-color": "#cf9591" },
+                    "background-color": "#E8A088",
+                    ":focus": { "background-color": "#cf9591" },
+                    "color": "#fff",
+                    "font-family": "Crimson Text, serif",
+                    "font-size": "16px",
+                    "padding": "12px 32px",
+                    "text-transform": "uppercase",
+                    "letter-spacing": "0.05em",
                   },
                 },
-                modalProduct: {
-                  contents: {
-                    img: false,
-                    imgWithCarousel: true,
-                    button: false,
-                    buttonWithQuantity: true,
+                text: { button: "Add to Cart" },
+                contents: {
+                  img: false,
+                  title: false,
+                  price: false,
+                },
+              },
+              cart: {
+                styles: {
+                  button: {
+                    ":hover": { "background-color": "#cf9591" },
+                    "background-color": "#E8A088",
+                    ":focus": { "background-color": "#cf9591" },
+                    "color": "#fff",
+                    "font-family": "Crimson Text, serif",
                   },
-                  styles: {
-                    product: {
-                      "@media (min-width: 601px)": {
-                        "max-width": "100%",
-                        "margin-left": "0px",
-                        "margin-bottom": "0px",
-                      },
-                    },
-                    button: {
-                      ":hover": { "background-color": "#cf9591" },
-                      "background-color": "#E8A088",
-                      ":focus": { "background-color": "#cf9591" },
-                      "color": "#fff",
-                    },
+                },
+                text: { total: "Subtotal", button: "Checkout" },
+              },
+              toggle: {
+                styles: {
+                  toggle: {
+                    "background-color": "#E8A088",
+                    ":hover": { "background-color": "#cf9591" },
+                    ":focus": { "background-color": "#cf9591" },
                   },
                 },
               },
-            })
-              .then(() => {
-                setLoading(false);
-              })
-              .catch((err: any) => {
-                console.error("Error creating Shopify component:", err);
-                setError("Failed to load product");
-                setLoading(false);
-              });
-          })
-          .catch((err: any) => {
-            console.error("Error initializing Shopify UI:", err);
-            setError("Failed to initialize cart");
-            setLoading(false);
+              modalProduct: {
+                contents: {
+                  img: false,
+                  imgWithCarousel: true,
+                  button: false,
+                  buttonWithQuantity: true,
+                },
+                styles: {
+                  product: {
+                    "@media (min-width: 601px)": {
+                      "max-width": "100%",
+                      "margin-left": "0px",
+                      "margin-bottom": "0px",
+                    },
+                  },
+                  button: {
+                    ":hover": { "background-color": "#cf9591" },
+                    "background-color": "#E8A088",
+                    ":focus": { "background-color": "#cf9591" },
+                    "color": "#fff",
+                  },
+                },
+              },
+            },
           });
+          setLoading(false);
+        }).catch((err: any) => {
+          console.error("Error initializing Shopify UI:", err);
+          setError("Failed to initialize cart");
+          setLoading(false);
+        });
       } catch (err) {
         console.error("Error in ShopifyBuyInit:", err);
         setError("Cart initialization failed");
