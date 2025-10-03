@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        'crimson-text': ['"Crimson Text"', 'serif'],
-        'playfair-display': ['"Playfair Display"', 'serif'],
+        'crimson-text': ['"Crimson Text"', '"Crimson Text Fallback"', 'serif'],
+        'playfair-display': ['"Playfair Display"', '"Playfair Display Fallback"', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
