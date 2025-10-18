@@ -3,7 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      img-src 'self' data: https: blob:;
+      font-src 'self' https://fonts.gstatic.com;
+      connect-src 'self' https://api.shopify.com https://www.google-analytics.com;
+      frame-src 'none';
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+    ">
     <title>Letters by Abbey - The Oracle Post | Handcrafted Letters with Love</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#8B5A3C">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Letters by Abbey">
     
     <!-- Prevent layout shift from font loading -->
     <style>
@@ -26,6 +45,8 @@
     </style>
     <meta name="description" content="Meaningful handwritten letters crafted with intention. Each letter offers encouragement, connection, and beauty through thoughtfully chosen words." />
     <meta name="author" content="Letters by Abbey" />
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
     
     <!-- Resource Hints for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,6 +63,8 @@
     <meta property="og:description" content="Meaningful handwritten letters crafted with intention" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://images.pexels.com/photos/6956629/pexels-photo-6956629.jpeg?auto=compress&cs=tinysrgb&w=1200" />
+    <meta property="og:url" content="https://www.lettersbyabbey.com" />
+    <meta property="og:site_name" content="Letters by Abbey" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Letters by Abbey" />
@@ -65,5 +88,20 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
   </body>
 </html>

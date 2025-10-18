@@ -101,7 +101,6 @@ export default function Header() {
               </div>
             </div>
           </div>
-          </div>
           {/* Dismissible close button */}
           <button
             onClick={handleDismissBanner}

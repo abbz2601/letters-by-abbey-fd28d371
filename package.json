@@ -7,7 +7,10 @@
 		"build": "vite build",
 	"build:dev": "vite build --mode development",
 		"preview": "vite preview",
-		"typecheck": "tsc --noEmit"
+		"typecheck": "tsc --noEmit",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:ui": "vitest --ui"
 	},
 	"dependencies": {
 		"@auth/core": "^0.37.2",
@@ -43,7 +46,7 @@
 		"lucide-react": "0.358.0",
 		"motion": "^12.7.4",
 		"papaparse": "^5.5.2",
-		"pdfjs-dist": "3.11.174",
+		"pdfjs-dist": "^5.4.296",
 		"react": "^18.2.0",
 		"react-colorful": "^5.6.1",
 		"react-day-picker": "^9.6.7",
@@ -63,6 +66,7 @@
 		"tailwind-merge": "^3.2.0",
 		"three": "^0.175.0",
 		"vaul": "^1.1.2",
+		"web-vitals": "^5.1.0",
 		"ws": "^8.18.2",
 		"yup": "^1.6.1",
 		"zustand": "^5.0.3"

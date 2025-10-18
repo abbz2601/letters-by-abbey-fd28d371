@@ -20,4 +20,23 @@ export default defineConfig(({ mode }) => ({
   optimizeDeps: {
     exclude: ["lucide-react"],
   },
+  build: {
+    target: 'esnext',
+    minify: 'esbuild',
+    sourcemap: mode === 'development',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+          ui: ['@tanstack/react-query', 'lucide-react'],
+        },
+      },
+    },
+    reportCompressedSize: false,
+    chunkSizeWarningLimit: 1600,
+  },
+  define: {
+    __DEV__: mode === 'development',
+  },
 }));

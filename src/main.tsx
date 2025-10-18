@@ -2,6 +2,12 @@ import { createRoot } from "react-dom/client";
 import React, { Component, type ReactNode } from "react";
 import App from "./App.tsx";
 import "./index.css";
+import { initWebVitals } from "./lib/analytics";
+import "./lib/performance"; // Initialize performance monitoring
+import "./lib/accessibility"; // Initialize accessibility enhancements
+
+// Initialize web vitals monitoring
+initWebVitals();
 
 class RootErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean; error: unknown | null }> {
   state = { hasError: false, error: null };
