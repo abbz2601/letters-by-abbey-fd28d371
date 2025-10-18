@@ -118,9 +118,30 @@ All colors MUST be HSL.
   }
 
   /* Smooth scrolling */
-  html {
-    scroll-behavior: smooth;
+html {
+  scroll-behavior: smooth;
+}
+
+/* Professional marquee utilities */
+.marquee-container {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+}
+
+.marquee-content {
+  display: flex;
+  flex-shrink: 0;
+  min-width: 100%;
+  will-change: transform;
+}
+
+/* Accessibility: Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-content {
+    animation-play-state: paused !important;
   }
+}
 
   /* Improve touch targets for mobile */
   @media (max-width: 768px) {

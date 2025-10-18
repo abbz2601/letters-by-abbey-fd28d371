@@ -1,10 +1,13 @@
-import { Menu, ShoppingBag, Heart, X } from "lucide-react";
+import { Menu, ShoppingBag, Sparkles, X } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isBannerVisible, setIsBannerVisible] = useState(() => {
+    return localStorage.getItem("bannerDismissed") !== "true";
+  });
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   
   useFocusTrap(mobileMenuRef, isMobileMenuOpen);
@@ -32,23 +35,68 @@ export default function Header() {
     };
   }, [isMobileMenuOpen]);
 
+  const handleDismissBanner = () => {
+    setIsBannerVisible(false);
+    localStorage.setItem("bannerDismissed", "true");
+  };
+
   return (
     <div className="w-full">
-      {/* Promo Ribbon */}
-      <div className="bg-secondary h-10 overflow-hidden relative group" role="banner" aria-label="Promotional banner">
-        <div className="marquee-container h-full flex items-center">
-          <div className="marquee-content flex items-center whitespace-nowrap animate-marquee group-hover:[animation-play-state:paused]">
-            {[...Array(10)].map((_, i) => (
-              <div key={i} className="flex items-center">
-                <span className="text-primary-foreground font-crimson-text text-sm lg:text-sm uppercase tracking-wider opacity-90 px-8">
-                  HANDCRAFTED LETTERS WITH LOVE & INTENTION
-                </span>
-                <Heart className="w-3 h-3 text-primary-foreground opacity-90" aria-hidden="true" />
-              </div>
-            ))}
+      {/* Professional Promo Banner */}
+      {isBannerVisible && (
+        <div 
+          className="bg-gradient-to-r from-secondary/95 to-secondary h-10 sm:h-12 overflow-hidden relative group shadow-sm border-b border-secondary/20" 
+          role="banner" 
+          aria-label="Promotional banner"
+        >
+          <div className="marquee-container h-full flex">
+            {/* First set for seamless loop */}
+            <div className="marquee-content flex items-center gap-6 sm:gap-12 whitespace-nowrap animate-marquee-slow group-hover:[animation-play-state:paused]">
+              {[...Array(4)].map((_, i) => (
+                <div key={`set1-${i}`} className="flex items-center gap-6 sm:gap-12">
+                  <Sparkles className="w-3.5 h-3.5 text-primary-foreground flex-shrink-0" aria-hidden="true" />
+                  <span className="text-primary-foreground font-crimson-text text-xs sm:text-sm uppercase tracking-wider font-medium">
+                    Handcrafted Letters for Every Occasion
+                  </span>
+                  <span className="text-primary-foreground/60 font-crimson-text text-xs sm:text-sm" aria-hidden="true">
+                    •
+                  </span>
+                  <span className="text-primary-foreground font-crimson-text text-xs sm:text-sm uppercase tracking-wider font-medium">
+                    Shipped with Care
+                  </span>
+                  <Sparkles className="w-3.5 h-3.5 text-primary-foreground flex-shrink-0" aria-hidden="true" />
+                </div>
+              ))}
+            </div>
+            {/* Second set (duplicate for seamless loop) */}
+            <div className="marquee-content flex items-center gap-6 sm:gap-12 whitespace-nowrap animate-marquee-slow group-hover:[animation-play-state:paused]">
+              {[...Array(4)].map((_, i) => (
+                <div key={`set2-${i}`} className="flex items-center gap-6 sm:gap-12">
+                  <Sparkles className="w-3.5 h-3.5 text-primary-foreground flex-shrink-0" aria-hidden="true" />
+                  <span className="text-primary-foreground font-crimson-text text-xs sm:text-sm uppercase tracking-wider font-medium">
+                    Handcrafted Letters for Every Occasion
+                  </span>
+                  <span className="text-primary-foreground/60 font-crimson-text text-xs sm:text-sm" aria-hidden="true">
+                    •
+                  </span>
+                  <span className="text-primary-foreground font-crimson-text text-xs sm:text-sm uppercase tracking-wider font-medium">
+                    Shipped with Care
+                  </span>
+                  <Sparkles className="w-3.5 h-3.5 text-primary-foreground flex-shrink-0" aria-hidden="true" />
+                </div>
+              ))}
+            </div>
           </div>
+          {/* Dismissible close button */}
+          <button
+            onClick={handleDismissBanner}
+            className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 hover:bg-primary-foreground/10 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-foreground/50"
+            aria-label="Close banner"
+          >
+            <X className="w-4 h-4 text-primary-foreground" aria-hidden="true" />
+          </button>
         </div>
-      </div>
+      )}
 
       {/* Main Header */}
       <header className="bg-background border-b border-muted h-16 md:h-20 px-4 lg:px-8">
