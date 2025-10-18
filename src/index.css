@@ -116,8 +116,9 @@ All colors MUST be HSL.
     white-space: nowrap;
     border-width: 0;
   }
+}
 
-  /* Smooth scrolling */
+/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
@@ -143,15 +144,14 @@ html {
   }
 }
 
-  /* Improve touch targets for mobile */
-  @media (max-width: 768px) {
-    button,
-    a,
-    input,
-    select,
-    textarea {
-      min-height: 44px;
-      min-width: 44px;
-    }
+/* Improve touch targets for mobile */
+@media (max-width: 768px) {
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    min-height: 44px;
+    min-width: 44px;
   }
 }
