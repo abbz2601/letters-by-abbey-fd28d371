@@ -49,43 +49,58 @@ export default function Header() {
           role="banner" 
           aria-label="Promotional banner"
         >
-          <div className="marquee-container h-full flex">
-            {/* First set for seamless loop */}
-            <div className="marquee-content flex items-center gap-6 sm:gap-12 whitespace-nowrap animate-marquee-slow group-hover:[animation-play-state:paused]">
-              {[...Array(4)].map((_, i) => (
-                <div key={`set1-${i}`} className="flex items-center gap-6 sm:gap-12">
-                  <Sparkles className="w-3.5 h-3.5 text-primary-foreground flex-shrink-0" aria-hidden="true" />
-                  <span className="text-primary-foreground font-crimson-text text-xs sm:text-sm uppercase tracking-wider font-medium">
-                    Handcrafted Letters for Every Occasion
-                  </span>
-                  <span className="text-primary-foreground/60 font-crimson-text text-xs sm:text-sm" aria-hidden="true">
-                    •
-                  </span>
-                  <span className="text-primary-foreground font-crimson-text text-xs sm:text-sm uppercase tracking-wider font-medium">
-                    Shipped with Care
-                  </span>
-                  <Sparkles className="w-3.5 h-3.5 text-primary-foreground flex-shrink-0" aria-hidden="true" />
-                </div>
-              ))}
+<div className="marquee-container h-full relative edge-fade group">
+            <div className="marquee-track animate-marquee group-hover:[animation-play-state:paused]">
+              {/* Visible row */}
+              <div className="marquee-item">
+                <Sparkles className="w-3.5 h-3.5 text-primary-foreground" aria-hidden="true" />
+                <span className="text-primary-foreground font-crimson-text text-xs sm:text-sm uppercase tracking-wider font-medium">
+                  Handcrafted Letters for Every Occasion
+                </span>
+                <span className="text-primary-foreground/60 font-crimson-text text-xs sm:text-sm" aria-hidden="true">•</span>
+                <span className="text-primary-foreground font-crimson-text text-xs sm:text-sm uppercase tracking-wider font-medium">
+                  Shipped with Care
+                </span>
+                <Sparkles className="w-3.5 h-3.5 text-primary-foreground" aria-hidden="true" />
+
+                {/* Repeat sequence to exceed viewport width */}
+                <span className="text-primary-foreground/60 font-crimson-text text-xs sm:text-sm" aria-hidden="true">•</span>
+                <Sparkles className="w-3.5 h-3.5 text-primary-foreground" aria-hidden="true" />
+                <span className="text-primary-foreground font-crimson-text text-xs sm:text-sm uppercase tracking-wider font-medium">
+                  Handcrafted Letters for Every Occasion
+                </span>
+                <span className="text-primary-foreground/60 font-crimson-text text-xs sm:text-sm" aria-hidden="true">•</span>
+                <span className="text-primary-foreground font-crimson-text text-xs sm:text-sm uppercase tracking-wider font-medium">
+                  Shipped with Care
+                </span>
+                <Sparkles className="w-3.5 h-3.5 text-primary-foreground" aria-hidden="true" />
+              </div>
+
+              {/* Duplicate row for seamless loop */}
+              <div className="marquee-item" aria-hidden="true">
+                <Sparkles className="w-3.5 h-3.5 text-primary-foreground" aria-hidden="true" />
+                <span className="text-primary-foreground font-crimson-text text-xs sm:text-sm uppercase tracking-wider font-medium">
+                  Handcrafted Letters for Every Occasion
+                </span>
+                <span className="text-primary-foreground/60 font-crimson-text text-xs sm:text-sm" aria-hidden="true">•</span>
+                <span className="text-primary-foreground font-crimson-text text-xs sm:text-sm uppercase tracking-wider font-medium">
+                  Shipped with Care
+                </span>
+                <Sparkles className="w-3.5 h-3.5 text-primary-foreground" aria-hidden="true" />
+
+                <span className="text-primary-foreground/60 font-crimson-text text-xs sm:text-sm" aria-hidden="true">•</span>
+                <Sparkles className="w-3.5 h-3.5 text-primary-foreground" aria-hidden="true" />
+                <span className="text-primary-foreground font-crimson-text text-xs sm:text-sm uppercase tracking-wider font-medium">
+                  Handcrafted Letters for Every Occasion
+                </span>
+                <span className="text-primary-foreground/60 font-crimson-text text-xs sm:text-sm" aria-hidden="true">•</span>
+                <span className="text-primary-foreground font-crimson-text text-xs sm:text-sm uppercase tracking-wider font-medium">
+                  Shipped with Care
+                </span>
+                <Sparkles className="w-3.5 h-3.5 text-primary-foreground" aria-hidden="true" />
+              </div>
             </div>
-            {/* Second set (duplicate for seamless loop) */}
-            <div className="marquee-content flex items-center gap-6 sm:gap-12 whitespace-nowrap animate-marquee-slow group-hover:[animation-play-state:paused]">
-              {[...Array(4)].map((_, i) => (
-                <div key={`set2-${i}`} className="flex items-center gap-6 sm:gap-12">
-                  <Sparkles className="w-3.5 h-3.5 text-primary-foreground flex-shrink-0" aria-hidden="true" />
-                  <span className="text-primary-foreground font-crimson-text text-xs sm:text-sm uppercase tracking-wider font-medium">
-                    Handcrafted Letters for Every Occasion
-                  </span>
-                  <span className="text-primary-foreground/60 font-crimson-text text-xs sm:text-sm" aria-hidden="true">
-                    •
-                  </span>
-                  <span className="text-primary-foreground font-crimson-text text-xs sm:text-sm uppercase tracking-wider font-medium">
-                    Shipped with Care
-                  </span>
-                  <Sparkles className="w-3.5 h-3.5 text-primary-foreground flex-shrink-0" aria-hidden="true" />
-                </div>
-              ))}
-            </div>
+          </div>
           </div>
           {/* Dismissible close button */}
           <button

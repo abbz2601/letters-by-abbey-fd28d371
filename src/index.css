@@ -130,6 +130,7 @@ html {
   user-select: none;
 }
 
+/* Existing content row (legacy) */
 .marquee-content {
   display: flex;
   flex-shrink: 0;
@@ -137,9 +138,32 @@ html {
   will-change: transform;
 }
 
+/* New seamless track utilities */
+.marquee-track {
+  display: flex;
+  width: fit-content;
+  flex-wrap: nowrap;
+  will-change: transform;
+}
+
+.marquee-item {
+  display: flex;
+  align-items: center;
+  gap: var(--gap, 3rem);
+  padding-inline: var(--gap, 3rem);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Subtle edge fade for premium look */
+.edge-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
+  mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
+}
 /* Accessibility: Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
-  .marquee-content {
+  .marquee-content,
+  .marquee-track {
     animation-play-state: paused !important;
   }
 }
