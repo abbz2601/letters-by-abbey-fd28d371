@@ -68,11 +68,12 @@ export default function FeaturedCollections() {
               <div className="relative aspect-square mb-4 md:mb-6 bg-muted overflow-hidden">
                 <img
                   src={collection.image_url}
-                  alt={collection.name}
+                  alt={`${collection.name} - Handwritten letter collection`}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
                 />
                 {/* Subtle overlay */}
-                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-300"></div>
+                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-300" aria-hidden="true"></div>
 
                 {/* Badge */}
                 <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">

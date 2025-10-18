@@ -1,14 +1,22 @@
+import SEO from "@/components/SEO";
+import SkipLink from "@/components/SkipLink";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export default function Privacy() {
   return (
-    <div className="min-h-screen bg-background">
-      <div className="sticky top-0 z-50">
-        <Header />
-      </div>
-      
-      <main className="py-16 md:py-20">
+    <>
+      <SEO
+        title="Privacy Policy - Letters by Abbey"
+        description="Learn how Letters by Abbey collects, uses, and protects your personal information. Your privacy is important to us."
+      />
+      <SkipLink />
+      <div className="min-h-screen bg-background">
+        <div className="sticky top-0 z-50">
+          <Header />
+        </div>
+        
+        <main id="main-content" className="py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-4 md:px-8">
           <h1 className="font-playfair-display text-5xl md:text-6xl text-foreground mb-8">
             Privacy <span className="italic">Policy</span>
@@ -49,9 +57,10 @@ export default function Privacy() {
             </section>
           </div>
         </div>
-      </main>
-      
-      <Footer />
-    </div>
+        </main>
+        
+        <Footer />
+      </div>
+    </>
   );
 }

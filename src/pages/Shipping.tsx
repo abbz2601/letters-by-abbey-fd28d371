@@ -1,14 +1,22 @@
+import SEO from "@/components/SEO";
+import SkipLink from "@/components/SkipLink";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export default function Shipping() {
   return (
-    <div className="min-h-screen bg-background">
-      <div className="sticky top-0 z-50">
-        <Header />
-      </div>
-      
-      <main className="py-16 md:py-20">
+    <>
+      <SEO
+        title="Shipping Information - Letters by Abbey"
+        description="Free shipping on all handwritten letter orders. Learn about processing times, shipping methods, and tracking for Letters by Abbey."
+      />
+      <SkipLink />
+      <div className="min-h-screen bg-background">
+        <div className="sticky top-0 z-50">
+          <Header />
+        </div>
+        
+        <main id="main-content" className="py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-4 md:px-8">
           <h1 className="font-playfair-display text-5xl md:text-6xl text-foreground mb-8">
             Shipping <span className="italic">Information</span>
@@ -50,9 +58,10 @@ export default function Shipping() {
             </section>
           </div>
         </div>
-      </main>
-      
-      <Footer />
-    </div>
+        </main>
+        
+        <Footer />
+      </div>
+    </>
   );
 }

@@ -1,5 +1,8 @@
+import SEO from "@/components/SEO";
+import SkipLink from "@/components/SkipLink";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Link } from "react-router-dom";
 
 export default function FAQ() {
   const faqs = [
@@ -25,46 +28,67 @@ export default function FAQ() {
     },
   ];
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
   return (
-    <div className="min-h-screen bg-background">
-      <div className="sticky top-0 z-50">
-        <Header />
-      </div>
-      
-      <main className="py-16 md:py-20">
-        <div className="max-w-4xl mx-auto px-4 md:px-8">
-          <h1 className="font-playfair-display text-5xl md:text-6xl lg:text-7xl text-foreground mb-8 text-center">
-            Frequently Asked <span className="italic">Questions</span>
-          </h1>
-          
-          <div className="space-y-8">
-            {faqs.map((faq, index) => (
-              <div key={index} className="border-b border-muted pb-8">
-                <h3 className="font-crimson-text text-xl md:text-2xl font-semibold text-foreground mb-4">
-                  {faq.question}
-                </h3>
-                <p className="font-crimson-text text-lg text-muted-foreground leading-relaxed">
-                  {faq.answer}
-                </p>
-              </div>
-            ))}
-          </div>
-          
-          <div className="mt-12 text-center">
-            <p className="font-crimson-text text-lg text-muted-foreground mb-4">
-              Still have questions?
-            </p>
-            <a
-              href="/contact"
-              className="inline-flex items-center px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-crimson-text text-lg uppercase tracking-wide transition-colors duration-200"
-            >
-              Contact Us
-            </a>
-          </div>
+    <>
+      <SEO
+        title="FAQ - Letters by Abbey | Frequently Asked Questions"
+        description="Find answers to common questions about ordering handwritten letters, custom options, shipping, and our satisfaction guarantee."
+        schema={faqSchema}
+      />
+      <SkipLink />
+      <div className="min-h-screen bg-background">
+        <div className="sticky top-0 z-50">
+          <Header />
         </div>
-      </main>
-      
-      <Footer />
-    </div>
+        
+        <main id="main-content" className="py-16 md:py-20">
+          <div className="max-w-4xl mx-auto px-4 md:px-8">
+            <h1 className="font-playfair-display text-5xl md:text-6xl lg:text-7xl text-foreground mb-8 text-center">
+              Frequently Asked <span className="italic">Questions</span>
+            </h1>
+            
+            <div className="space-y-8" role="list">
+              {faqs.map((faq, index) => (
+                <div key={index} className="border-b border-muted pb-8" role="listitem">
+                  <h3 className="font-crimson-text text-xl md:text-2xl font-semibold text-foreground mb-4">
+                    {faq.question}
+                  </h3>
+                  <p className="font-crimson-text text-lg text-muted-foreground leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </div>
+              ))}
+            </div>
+            
+            <div className="mt-12 text-center">
+              <p className="font-crimson-text text-lg text-muted-foreground mb-4">
+                Still have questions?
+              </p>
+              <Link
+                to="/contact"
+                className="inline-flex items-center px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-crimson-text text-lg uppercase tracking-wide transition-colors duration-200"
+              >
+                Contact Us
+              </Link>
+            </div>
+          </div>
+        </main>
+        
+        <Footer />
+      </div>
+    </>
   );
 }

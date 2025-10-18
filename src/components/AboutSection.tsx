@@ -62,13 +62,14 @@ export default function AboutSection() {
             <div className="relative">
               <img
                 src="https://images.pexels.com/photos/6956627/pexels-photo-6956627.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop"
-                alt="Beautiful handwritten letter with wax seal"
+                alt="Elegant handwritten letter with vintage wax seal on textured paper"
                 className="w-80 h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] object-cover"
+                loading="lazy"
               />
 
               {/* Decorative elements */}
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 border border-secondary opacity-30"></div>
-              <div className="absolute -top-4 -left-4 w-16 h-16 bg-secondary opacity-20"></div>
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 border border-secondary opacity-30" aria-hidden="true"></div>
+              <div className="absolute -top-4 -left-4 w-16 h-16 bg-secondary opacity-20" aria-hidden="true"></div>
             </div>
           </div>
         </div>

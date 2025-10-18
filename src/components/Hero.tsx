@@ -3,17 +3,19 @@ import { Link } from "react-router-dom";
 
 export default function Hero() {
   return (
-    <section className="relative h-screen bg-background">
+    <section className="relative h-screen bg-background" aria-label="Hero section">
       {/* Background Image */}
       <div className="absolute inset-0 m-[10px]">
         <img
           src="https://images.pexels.com/photos/6956629/pexels-photo-6956629.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
-          alt="Beautiful handwritten letters and envelopes"
+          alt="Elegant handwritten letters with vintage envelopes on a rustic desk, featuring calligraphy and wax seals"
           className="w-full h-full object-cover"
           style={{ objectPosition: "50% 40%" }}
+          loading="eager"
+          fetchpriority="high"
         />
         {/* Soft overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/50"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/50" aria-hidden="true"></div>
       </div>
 
       {/* Hero Content */}
@@ -61,8 +63,8 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-        <ChevronDown className="w-6 h-6 text-white/80 animate-bounce" />
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2" aria-hidden="true">
+        <ChevronDown className="w-6 h-6 text-white/80 animate-bounce" aria-label="Scroll down" />
       </div>
     </section>
   );
