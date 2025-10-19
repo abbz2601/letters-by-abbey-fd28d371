@@ -11,7 +11,7 @@ import Footer from "@/components/Footer";
 const Index = () => {
   const schema = {
     "@context": "https://schema.org",
-    "@type": "WebSite",
+    "@type": "Organization",
     "name": "Letters by Abbey",
     "description": "Meaningful handwritten letters crafted with intention",
     "url": "https://lettersbyabbey.com",

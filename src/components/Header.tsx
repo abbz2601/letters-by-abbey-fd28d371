@@ -5,9 +5,19 @@ import { useFocusTrap } from "@/hooks/useFocusTrap";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isBannerVisible, setIsBannerVisible] = useState(() => {
-    return localStorage.getItem("bannerDismissed") !== "true";
-  });
+  // Don't access localStorage during render (SSR). Default to visible
+  // and update from localStorage on the client in an effect.
+  const [isBannerVisible, setIsBannerVisible] = useState<boolean>(true);
+
+  useEffect(() => {
+    try {
+      const dismissed = typeof localStorage !== "undefined" && localStorage.getItem("bannerDismissed") === "true";
+      setIsBannerVisible(!dismissed);
+    } catch (err) {
+      // If access to localStorage fails (e.g. restricted environment), keep banner visible
+      setIsBannerVisible(true);
+    }
+  }, []);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   
   useFocusTrap(mobileMenuRef, isMobileMenuOpen);
@@ -40,7 +50,13 @@ export default function Header() {
 
   const handleDismissBanner = () => {
     setIsBannerVisible(false);
-    localStorage.setItem("bannerDismissed", "true");
+    try {
+      if (typeof localStorage !== "undefined") {
+        localStorage.setItem("bannerDismissed", "true");
+      }
+    } catch (err) {
+      // Ignore write failures
+    }
   };
 
   return (

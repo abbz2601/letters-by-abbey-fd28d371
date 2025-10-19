@@ -1,6 +1,7 @@
 import { createRoot } from "react-dom/client";
 import React, { Component, type ReactNode } from "react";
 import App from "./App.tsx";
+import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import { initWebVitals } from "./lib/analytics";
 import "./lib/performance"; // Initialize performance monitoring
@@ -34,7 +35,9 @@ if (rootElement) {
     console.log("Creating root and rendering App");
     createRoot(rootElement).render(
       <RootErrorBoundary>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </RootErrorBoundary>
     );
     console.log("App rendered successfully");

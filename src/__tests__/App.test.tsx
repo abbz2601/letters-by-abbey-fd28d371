@@ -34,7 +34,7 @@ describe('App Component', () => {
     renderWithRouter(<App />);
     
     // Check for skip link
-    const skipLink = screen.getByRole('link', { name: /skip to content/i });
+    const skipLink = screen.getByRole('link', { name: /skip to main content/i });
     expect(skipLink).toBeInTheDocument();
     expect(skipLink).toHaveAttribute('href', '#main-content');
   });
