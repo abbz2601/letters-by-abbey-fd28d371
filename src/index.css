@@ -179,3 +179,205 @@ html {
     min-width: 44px;
   }
 }
+
+/* Menu specific styles */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+}
+
+/* Prevent scroll when mobile menu is open */
+.mobile-menu-open {
+  overflow: hidden;
+}
+
+/* Improved mobile menu positioning */
+@media (max-width: 768px) {
+  .mobile-menu {
+    top: var(--header-height, 4rem);
+  }
+}
+
+/* Better responsive typography */
+@media (max-width: 640px) {
+  .brand-title {
+    font-size: 1.5rem; /* 24px */
+  }
+  
+  .brand-subtitle {
+    font-size: 0.625rem; /* 10px */
+  }
+}
+
+/* Beautiful header enhancements */
+.header-glass {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(139, 111, 71, 0.08);
+  box-shadow: 0 1px 3px rgba(139, 111, 71, 0.05);
+}
+
+/* Elegant hover effects */
+.nav-link-elegant {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link-elegant::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(139, 111, 71, 0.03),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.nav-link-elegant:hover::before {
+  left: 100%;
+}
+
+.nav-link-elegant::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary)), transparent);
+  transition: all 0.5s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link-elegant:hover::after {
+  width: 100%;
+}
+
+/* Mobile menu animations */
+@keyframes slideDownElegant {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-menu-enter {
+  animation: slideDownElegant 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Staggered animation for mobile menu items */
+.mobile-menu nav a:nth-child(1) { 
+  animation: fadeInUp 0.6s ease-out 0.1s both; 
+}
+.mobile-menu nav a:nth-child(2) { 
+  animation: fadeInUp 0.6s ease-out 0.2s both; 
+}
+.mobile-menu nav a:nth-child(3) { 
+  animation: fadeInUp 0.6s ease-out 0.3s both; 
+}
+.mobile-menu nav a:nth-child(4) { 
+  animation: fadeInUp 0.6s ease-out 0.4s both; 
+}
+.mobile-menu nav a:nth-child(5) { 
+  animation: fadeInUp 0.6s ease-out 0.5s both; 
+}
+
+/* Professional typography enhancements */
+.text-elegant {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Refined shadows */
+.shadow-elegant {
+  box-shadow: 
+    0 1px 3px rgba(139, 111, 71, 0.08),
+    0 1px 2px rgba(139, 111, 71, 0.04);
+}
+
+.shadow-elegant-lg {
+  box-shadow: 
+    0 4px 6px rgba(139, 111, 71, 0.05),
+    0 1px 3px rgba(139, 111, 71, 0.08),
+    0 0 0 1px rgba(139, 111, 71, 0.02);
+}
+
+/* Brand hover effect */
+.brand-elegant:hover {
+  transform: translateY(-1px);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Elegant shadows and glows */
+.elegant-shadow {
+  box-shadow: 
+    0 1px 3px rgba(139, 111, 71, 0.06),
+    0 1px 2px rgba(139, 111, 71, 0.04),
+    0 0 0 1px rgba(139, 111, 71, 0.02);
+}
+
+.elegant-glow {
+  box-shadow: 
+    0 0 20px rgba(139, 111, 71, 0.06),
+    0 4px 6px rgba(139, 111, 71, 0.04);
+}
+
+/* Professional focus states */
+.focus-elegant:focus-visible {
+  outline: 2px solid rgba(139, 111, 71, 0.2);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(139, 111, 71, 0.1);
+}
+
+/* Smooth scrolling enhancement */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+/* Letter spacing refinements */
+.tracking-elegant {
+  letter-spacing: 0.05em;
+}
+
+.tracking-elegant-wide {
+  letter-spacing: 0.15em;
+}
+
+/* Subtle animation utilities */
+.transition-elegant {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
