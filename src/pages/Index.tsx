@@ -76,10 +76,6 @@ const Index = () => {
                       Shop Letters Now
                       <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </Link>
-                    <button className="group inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-full hover:border-gray-400 hover:bg-gray-50 transition-all duration-200">
-                      <Play className="mr-2 w-5 h-5" />
-                      Watch Our Story
-                    </button>
                   </div>
 
                   {/* Social Proof */}
@@ -102,8 +98,8 @@ const Index = () => {
                 <div className="relative">
                   <div className="relative z-10 transform hover:scale-105 transition-transform duration-500">
                     <img
-                      src="https://images.pexels.com/photos/6956629/pexels-photo-6956629.jpeg?auto=compress&cs=tinysrgb&w=800"
-                      alt="Beautiful handwritten letter with wax seal"
+                      src="/images/collections/wedding-day.png"
+                      alt="Wedding Blessings Letter - A Keepsake for the Beginning of Forever"
                       className="w-full h-auto rounded-3xl shadow-2xl"
                       loading="eager"
                     />
@@ -187,8 +183,8 @@ const Index = () => {
                 <div className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2">
                   <div className="relative">
                     <img
-                      src="https://images.pexels.com/photos/6956627/pexels-photo-6956627.jpeg?auto=compress&cs=tinysrgb&w=400"
-                      alt="Love Letters Collection"
+                      src="/images/collections/wedding-day.png"
+                      alt="Wedding Blessings Letter - A Keepsake for the Beginning of Forever"
                       className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute top-4 left-4 bg-rose-500 text-white px-3 py-1 rounded-full text-sm font-medium">
@@ -214,8 +210,8 @@ const Index = () => {
                 <div className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2">
                   <div className="relative">
                     <img
-                      src="https://images.pexels.com/photos/6956629/pexels-photo-6956629.jpeg?auto=compress&cs=tinysrgb&w=400"
-                      alt="Thank You Notes"
+                      src="/images/collections/finding-joy.png"
+                      alt="Everyday Joy Letter - Because Joy Lives in the Little Things"
                       className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute top-4 left-4 bg-amber-500 text-white px-3 py-1 rounded-full text-sm font-medium">
@@ -241,8 +237,8 @@ const Index = () => {
                 <div className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2">
                   <div className="relative">
                     <img
-                      src="https://images.pexels.com/photos/6956629/pexels-photo-6956629.jpeg?auto=compress&cs=tinysrgb&w=400"
-                      alt="Sympathy Letters"
+                      src="/images/collections/grief-support.png"
+                      alt="Grief Support Letter - Words When Silence Feels Heavy"
                       className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute top-4 left-4 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium">
