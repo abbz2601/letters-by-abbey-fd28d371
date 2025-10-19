@@ -13,7 +13,7 @@ export interface Collection {
 }
 
 // Hardcoded collections data
-const COLLECTIONS: Collection[] = [
+export const COLLECTIONS: Collection[] = [
   {
     id: "1",
     name: "Wedding Blessings Letter - A Keepsake for the Beginning of Forever",

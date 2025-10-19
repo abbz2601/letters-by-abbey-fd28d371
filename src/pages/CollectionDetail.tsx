@@ -3,14 +3,16 @@ import SEO from "@/components/SEO";
 import SkipLink from "@/components/SkipLink";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { useCollection } from "@/hooks/useCollections";
+import { COLLECTIONS, Collection } from "../hooks/useCollections";
 import { ArrowLeft } from "lucide-react";
 import ShopifyBuyButton from "@/components/ShopifyBuyButton";
 import TrustBadges from "@/components/TrustBadges";
 
 export default function CollectionDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const { data: collection, isLoading, error } = useCollection(slug || '');
+  const collection = COLLECTIONS.find((c: Collection) => c.slug === slug);
+  const isLoading = false;
+  const error = !collection;
 
   if (isLoading) {
     return (

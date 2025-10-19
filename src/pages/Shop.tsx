@@ -1,12 +1,13 @@
-import SEO from "@/components/SEO";
-import SkipLink from "@/components/SkipLink";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { useCollections } from "@/hooks/useCollections";
+import SEO from "../components/SEO";
+import SkipLink from "../components/SkipLink";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import { COLLECTIONS, Collection } from "../hooks/useCollections";
 import { Link } from "react-router-dom";
 
 export default function Shop() {
-  const { data: collections, isLoading } = useCollections();
+  const collections = COLLECTIONS;
+  const isLoading = false;
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -64,7 +65,7 @@ export default function Shop() {
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-                {collections?.map((collection, index) => (
+                {collections?.map((collection: Collection, index: number) => (
                   <Link
                     key={collection.id}
                     to={`/shop/collections/${collection.slug}`}
