@@ -5,7 +5,7 @@ import { useCartStore } from '../store/useCartStore';
 
 function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const cartItemCount = useCartStore((state) => state.getTotalItems());
+  const cartItemCount = useCartStore((state) => state.getItemCount());
 
   return (
     <header className="bg-white/95 backdrop-blur-lg border-b border-gray-200/50 sticky top-0 z-50">

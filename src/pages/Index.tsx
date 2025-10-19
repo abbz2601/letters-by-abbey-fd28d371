@@ -1,7 +1,7 @@
-import SEO from "@/components/SEO";
-import SkipLink from "@/components/SkipLink";
+import SEO from "../components/SEO";
+import SkipLink from "../components/SkipLink";
 import Header from "../components/Header";
-import Footer from "@/components/Footer";
+import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { Star, Heart, Gift, Clock, Shield, Truck, CheckCircle, ArrowRight, Play, Quote } from "lucide-react";
 
