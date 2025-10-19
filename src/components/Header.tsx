@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ShoppingBag, Menu, X } from 'lucide-react';
 import { useCartStore } from '../store/useCartStore';
 
-export function Header() {
+function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const cartItemCount = useCartStore((state) => state.getTotalItems());
 
@@ -104,3 +104,5 @@ export function Header() {
     </header>
   );
 }
+
+export default Header;
