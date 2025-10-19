@@ -1,275 +1,106 @@
-import { Menu, ShoppingBag, Sparkles, X } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useFocusTrap } from "@/hooks/useFocusTrap";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ShoppingBag, Menu, X } from 'lucide-react';
+import { useCartStore } from '../store/useCartStore';
 
-export default function Header() {
+export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  // Don't access localStorage during render (SSR). Default to visible
-  // and update from localStorage on the client in an effect.
-  const [isBannerVisible, setIsBannerVisible] = useState<boolean>(true);
-
-  useEffect(() => {
-    try {
-      const dismissed = typeof localStorage !== "undefined" && localStorage.getItem("bannerDismissed") === "true";
-      setIsBannerVisible(!dismissed);
-    } catch (err) {
-      // If access to localStorage fails (e.g. restricted environment), keep banner visible
-      setIsBannerVisible(true);
-    }
-  }, []);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
-  
-  useFocusTrap(mobileMenuRef, isMobileMenuOpen);
-
-  // Close mobile menu on Escape key
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isMobileMenuOpen) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-    document.addEventListener("keydown", handleEscape);
-    return () => document.removeEventListener("keydown", handleEscape);
-  }, [isMobileMenuOpen]);
-
-  // Prevent body scroll when mobile menu is open
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-      document.body.classList.add("mobile-menu-open");
-    } else {
-      document.body.style.overflow = "";
-      document.body.classList.remove("mobile-menu-open");
-    }
-    return () => {
-      document.body.style.overflow = "";
-      document.body.classList.remove("mobile-menu-open");
-    };
-  }, [isMobileMenuOpen]);
-
-  const handleDismissBanner = () => {
-    setIsBannerVisible(false);
-    try {
-      if (typeof localStorage !== "undefined") {
-        localStorage.setItem("bannerDismissed", "true");
-      }
-    } catch (err) {
-      // Ignore write failures
-    }
-  };
+  const cartItemCount = useCartStore((state) => state.getTotalItems());
 
   return (
-    <div className="w-full">
-      {/* Professional Promo Banner */}
-      {isBannerVisible && (
-        <div 
-          className="bg-gradient-to-r from-primary/2 via-secondary/3 to-accent/2 h-9 sm:h-10 overflow-hidden relative group border-b border-primary/3" 
-          role="banner" 
-          aria-label="Promotional banner"
-        >
-<div className="marquee-container h-full relative edge-fade group">
-            <div className="marquee-track animate-marquee group-hover:[animation-play-state:paused]">
-              {/* Visible row */}
-              <div className="marquee-item">
-                <Sparkles className="w-3 h-3 text-primary opacity-25" aria-hidden="true" />
-                <span className="text-primary/50 font-crimson-text text-xs uppercase tracking-[0.15em] font-light">
-                  Handcrafted Letters for Every Occasion
-                </span>
-                <span className="text-primary/20 font-crimson-text text-xs" aria-hidden="true">•</span>
-                <span className="text-primary/50 font-crimson-text text-xs uppercase tracking-[0.15em] font-light">
-                  Shipped with Care
-                </span>
-                <Sparkles className="w-3 h-3 text-primary opacity-25" aria-hidden="true" />
-
-                {/* Repeat sequence to exceed viewport width */}
-                <span className="text-primary/20 font-crimson-text text-xs" aria-hidden="true">•</span>
-                <Sparkles className="w-3 h-3 text-primary opacity-25" aria-hidden="true" />
-                <span className="text-primary/50 font-crimson-text text-xs uppercase tracking-[0.15em] font-light">
-                  Handcrafted Letters for Every Occasion
-                </span>
-                <span className="text-primary/20 font-crimson-text text-xs" aria-hidden="true">•</span>
-                <span className="text-primary/50 font-crimson-text text-xs uppercase tracking-[0.15em] font-light">
-                  Shipped with Care
-                </span>
-                <Sparkles className="w-3 h-3 text-primary opacity-25" aria-hidden="true" />
-              </div>
-
-              {/* Duplicate row for seamless loop */}
-              <div className="marquee-item" aria-hidden="true">
-                <Sparkles className="w-3 h-3 text-primary opacity-25" aria-hidden="true" />
-                <span className="text-primary/50 font-crimson-text text-xs uppercase tracking-[0.15em] font-light">
-                  Handcrafted Letters for Every Occasion
-                </span>
-                <span className="text-primary/20 font-crimson-text text-xs" aria-hidden="true">•</span>
-                <span className="text-primary/50 font-crimson-text text-xs uppercase tracking-[0.15em] font-light">
-                  Shipped with Care
-                </span>
-                <Sparkles className="w-3 h-3 text-primary opacity-25" aria-hidden="true" />
-
-                <span className="text-primary/20 font-crimson-text text-xs" aria-hidden="true">•</span>
-                <Sparkles className="w-3 h-3 text-primary opacity-25" aria-hidden="true" />
-                <span className="text-primary/50 font-crimson-text text-xs uppercase tracking-[0.15em] font-light">
-                  Handcrafted Letters for Every Occasion
-                </span>
-                <span className="text-primary/20 font-crimson-text text-xs" aria-hidden="true">•</span>
-                <span className="text-primary/50 font-crimson-text text-xs uppercase tracking-[0.15em] font-light">
-                  Shipped with Care
-                </span>
-                <Sparkles className="w-3 h-3 text-primary opacity-25" aria-hidden="true" />
-              </div>
+    <header className="bg-white/95 backdrop-blur-lg border-b border-gray-200/50 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16 md:h-20">
+          <Link to="/" className="flex items-center">
+            <div className="text-center">
+              <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Letters by Abbey
+              </h1>
+              <p className="text-xs text-gray-600 tracking-wide">
+                Handcrafted with Love
+              </p>
             </div>
-          </div>
-          {/* Dismissible close button */}
-          <button
-            onClick={handleDismissBanner}
-            className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-primary/5 rounded-full transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-primary/20 opacity-40 hover:opacity-70"
-            aria-label="Close banner"
-          >
-            <X className="w-3 h-3 text-primary/60" aria-hidden="true" />
-          </button>
-        </div>
-      )}
+          </Link>
 
-      {/* Main Header */}
-      <header className="bg-background/90 backdrop-blur-lg border-b border-border/20 h-20 md:h-24 px-6 lg:px-12 relative z-40">
-        <div className="flex items-center justify-between h-full max-w-7xl mx-auto">
-          {/* Left zone - Navigation */}
-          <nav className="hidden lg:flex items-center gap-12" aria-label="Main navigation">
-            <Link
-              to="/"
-              className="nav-link-elegant font-crimson-text text-foreground/40 text-sm uppercase tracking-elegant hover:text-foreground/65 transition-all duration-300 focus:outline-none focus-elegant rounded-sm px-1 py-2 group font-light text-elegant"
-            >
+          <nav className="hidden md:flex items-center space-x-8">
+            <Link to="/" className="text-gray-700 hover:text-gray-900 font-medium transition-colors">
               Home
             </Link>
-            <Link
-              to="/shop"
-              className="nav-link-elegant font-crimson-text text-foreground/40 text-sm uppercase tracking-elegant hover:text-foreground/65 transition-all duration-300 focus:outline-none focus-elegant rounded-sm px-1 py-2 group font-light text-elegant"
-            >
+            <Link to="/shop" className="text-gray-700 hover:text-gray-900 font-medium transition-colors">
               Shop
             </Link>
-            <Link
-              to="/about"
-              className="nav-link-elegant font-crimson-text text-foreground/40 text-sm uppercase tracking-elegant hover:text-foreground/65 transition-all duration-300 focus:outline-none focus-elegant rounded-sm px-1 py-2 group font-light text-elegant"
-            >
+            <Link to="/about" className="text-gray-700 hover:text-gray-900 font-medium transition-colors">
               About
             </Link>
-            <Link
-              to="/contact"
-              className="nav-link-elegant font-crimson-text text-foreground/40 text-sm uppercase tracking-elegant hover:text-foreground/65 transition-all duration-300 focus:outline-none focus-elegant rounded-sm px-1 py-2 group font-light text-elegant"
-            >
+            <Link to="/contact" className="text-gray-700 hover:text-gray-900 font-medium transition-colors">
               Contact
             </Link>
-            <Link
-              to="/faq"
-              className="nav-link-elegant font-crimson-text text-foreground/40 text-sm uppercase tracking-elegant hover:text-foreground/65 transition-all duration-300 focus:outline-none focus-elegant rounded-sm px-1 py-2 group font-light text-elegant"
-            >
+            <Link to="/faq" className="text-gray-700 hover:text-gray-900 font-medium transition-colors">
               FAQ
             </Link>
           </nav>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="flex items-center gap-2 p-2 group lg:hidden focus:outline-none focus:ring-2 focus:ring-primary/15 rounded-lg transition-all duration-300 hover:bg-muted/20"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-menu"
-            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-          >
-            <div className="relative">
-              {isMobileMenuOpen ? (
-                <X className="w-5 h-5 text-foreground/50 transition-all duration-300" aria-hidden="true" />
-              ) : (
-                <Menu className="w-5 h-5 text-foreground/50 transition-all duration-300" aria-hidden="true" />
+          <div className="flex items-center space-x-4">
+            <Link to="/cart" className="relative p-2 text-gray-700 hover:text-gray-900">
+              <ShoppingBag className="w-6 h-6" />
+              {cartItemCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-purple-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {cartItemCount}
+                </span>
               )}
-            </div>
-            <span className="font-crimson-text text-foreground/50 text-xs uppercase tracking-[0.2em] hidden sm:block group-hover:text-foreground/70 transition-all duration-300 font-light">
-              {isMobileMenuOpen ? "CLOSE" : "MENU"}
-            </span>
-          </button>
-
-          {/* Center zone - Brand */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 text-center">
-            <Link to="/" className="brand-elegant block focus:outline-none focus-elegant rounded-lg p-3 transition-elegant group text-elegant" aria-label="Letters by Abbey home">
-              <h1 className="font-playfair-display font-light text-foreground/75 text-3xl sm:text-4xl md:text-5xl whitespace-nowrap transition-elegant group-hover:text-primary/70 tracking-tight">
-                <span className="italic font-light">Letters by</span> <span className="font-normal">Abbey</span>
-              </h1>
-              <p className="font-crimson-text text-xs text-muted-foreground/35 text-center tracking-elegant-wide uppercase hidden sm:block mt-1 transition-elegant group-hover:text-primary/40 font-light">
-                The Oracle Post
-              </p>
             </Link>
-          </div>
 
-          {/* Right zone - Cart */}
-          <Link to="/cart" className="flex items-center gap-3 p-2 group focus:outline-none focus:ring-2 focus:ring-primary/10 rounded-lg transition-all duration-300 hover:bg-muted/15" aria-label="View shopping cart">
-            <div className="relative">
-              <ShoppingBag className="w-5 h-5 md:w-6 md:h-6 text-foreground/35 transition-all duration-300 group-hover:text-foreground/55" aria-hidden="true" />
-            </div>
-            <span className="font-crimson-text text-foreground/35 text-xs uppercase tracking-[0.2em] group-hover:text-foreground/55 transition-all duration-300 font-light">
-              CART
-            </span>
-          </Link>
+            <button
+              className="md:hidden p-2 text-gray-700 hover:text-gray-900"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
-        {/* Mobile Menu Backdrop */}
         {isMobileMenuOpen && (
-          <div 
-            className="lg:hidden fixed inset-0 bg-foreground/3 backdrop-blur-sm z-[90] animate-in fade-in duration-500"
-            onClick={() => setIsMobileMenuOpen(false)}
-            aria-hidden="true"
-          />
-        )}
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div 
-            id="mobile-menu"
-            ref={mobileMenuRef}
-            className="lg:hidden fixed top-20 left-0 w-full bg-background/95 backdrop-blur-xl border-b border-border/20 z-[100] max-h-[calc(100vh-5rem)] overflow-y-auto animate-in slide-in-from-top-4 duration-500"
-            role="dialog"
-            aria-label="Mobile navigation menu"
-          >
-            <nav className="mobile-menu flex flex-col py-8 px-6" aria-label="Mobile navigation">
+          <div className="md:hidden border-t border-gray-200">
+            <div className="px-2 pt-2 pb-3 space-y-1">
               <Link
                 to="/"
-                className="px-6 py-4 font-crimson-text text-foreground/60 text-base uppercase tracking-elegant hover:text-foreground/80 transition-all duration-300 focus:outline-none focus-elegant rounded-lg group font-light border-l border-transparent hover:border-primary/15 text-elegant"
+                className="block px-3 py-2 text-gray-700 hover:text-gray-900 font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <span className="relative z-10">Home</span>
+                Home
               </Link>
               <Link
                 to="/shop"
-                className="px-6 py-4 font-crimson-text text-foreground/60 text-base uppercase tracking-elegant hover:text-foreground/80 transition-all duration-300 focus:outline-none focus-elegant rounded-lg group font-light border-l border-transparent hover:border-primary/15 text-elegant"
+                className="block px-3 py-2 text-gray-700 hover:text-gray-900 font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <span className="relative z-10">Shop</span>
+                Shop
               </Link>
               <Link
                 to="/about"
-                className="px-6 py-4 font-crimson-text text-foreground/60 text-base uppercase tracking-elegant hover:text-foreground/80 transition-all duration-300 focus:outline-none focus-elegant rounded-lg group font-light border-l border-transparent hover:border-primary/15 text-elegant"
+                className="block px-3 py-2 text-gray-700 hover:text-gray-900 font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <span className="relative z-10">About</span>
+                About
               </Link>
               <Link
                 to="/contact"
-                className="px-6 py-4 font-crimson-text text-foreground/60 text-base uppercase tracking-elegant hover:text-foreground/80 transition-all duration-300 focus:outline-none focus-elegant rounded-lg group font-light border-l border-transparent hover:border-primary/15 text-elegant"
+                className="block px-3 py-2 text-gray-700 hover:text-gray-900 font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <span className="relative z-10">Contact</span>
+                Contact
               </Link>
               <Link
                 to="/faq"
-                className="px-6 py-4 font-crimson-text text-foreground/60 text-base uppercase tracking-elegant hover:text-foreground/80 transition-all duration-300 focus:outline-none focus-elegant rounded-lg group font-light border-l border-transparent hover:border-primary/15 text-elegant"
+                className="block px-3 py-2 text-gray-700 hover:text-gray-900 font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <span className="relative z-10">FAQ</span>
+                FAQ
               </Link>
-            </nav>
+            </div>
           </div>
         )}
-      </header>
-
-    </div>
+      </div>
+    </header>
   );
 }
