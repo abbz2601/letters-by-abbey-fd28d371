@@ -178,89 +178,91 @@ const Index = () => {
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-8">
-                {/* Product 1 */}
-                <div className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2">
-                  <div className="relative">
-                    <img
-                      src="/images/collections/wedding-day.png"
-                      alt="Wedding Blessings Letter - A Keepsake for the Beginning of Forever"
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute top-4 left-4 bg-rose-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                      Bestseller
-                    </div>
+              {/* Import collections and display all with updated images */}
+              {/* This block uses the same data as FeaturedCollections */}
+              {(() => {
+                const collections = [
+                  {
+                    id: "1",
+                    name: "Wedding Blessings Letter - A Keepsake for the Beginning of Forever",
+                    slug: "wedding-blessings",
+                    description: "Celebrate one of life's most beautiful milestones with a heartfelt wedding letter. Perfect for the couple, parents, or as a meaningful gift, this handwritten letter captures the joy, promise, and beauty of forever.",
+                    image_url: "/images/collections/wedding-day.png",
+                    price: "35.00",
+                  },
+                  {
+                    id: "2",
+                    name: "Everyday Joy Letter - Because Joy Lives in the Little Things",
+                    slug: "everyday-joy",
+                    description: "Happiness doesn't always come in grand gestures - sometimes it's found in the quiet, everyday moments. This letter celebrates life's small blessings, offering words that bring warmth and gratitude to any day.",
+                    image_url: "/images/collections/finding-joy.png",
+                    price: "24.00",
+                  },
+                  {
+                    id: "3",
+                    name: "Daily Affirmations Letter - A Daily Reminder That You Are Enough",
+                    slug: "daily-affirmations",
+                    description: "Start every day with words that lift you up. This affirmation letter is designed to be a gentle, powerful reminder of your worth, strength, and beauty - just as you are.",
+                    image_url: "/images/collections/you-are-enough.png",
+                    price: "22.00",
+                  },
+                  {
+                    id: "4",
+                    name: "Birthday Joy Letter - Celebrate a Life, Beautifully",
+                    slug: "birthday-joy",
+                    description: "Birthdays are more than just another year - they're a celebration of a life that matters. This letter honours that person with words that make them feel seen, loved, and truly celebrated.",
+                    image_url: "/images/collections/wishing-you-joy.png",
+                    price: "28.00",
+                  },
+                  {
+                    id: "5",
+                    name: "Grief Support Letter - Words When Silence Feels Heavy",
+                    slug: "grief-support",
+                    description: "In times of loss, words can feel impossible - but they're also incredibly powerful. This letter offers comfort, understanding, and a gentle reminder that they're not alone in their grief.",
+                    image_url: "/images/collections/grief-support.png",
+                    price: "25.00",
+                  },
+                  {
+                    id: "6",
+                    name: "Seasonal Reflections Letter - Words for Every Season of Life",
+                    slug: "seasonal-reflections",
+                    description: "Pause, breathe, and embrace the season you're in. Whether it's a time of growth, rest, or transformation, this letter meets you where you are with words that feel like coming home.",
+                    image_url: "/images/collections/reflections-season.png",
+                    price: "30.00",
+                  },
+                ];
+                return (
+                  <div className="grid md:grid-cols-3 gap-8">
+                    {collections.map((collection) => (
+                      <div key={collection.id} className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2">
+                        <div className="relative">
+                          <img
+                            src={collection.image_url}
+                            alt={collection.name}
+                            className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                          />
+                          <div className="absolute top-4 left-4 bg-rose-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                            {collection.slug === "wedding-blessings" ? "Bestseller" : collection.slug === "grief-support" ? "Heartfelt" : collection.slug === "everyday-joy" ? "Popular" : "Featured"}
+                          </div>
+                        </div>
+                        <div className="p-6">
+                          <h3 className="text-xl font-semibold text-gray-900 mb-2">{collection.name}</h3>
+                          <p className="text-gray-600 mb-4">{collection.description}</p>
+                          <div className="flex items-center justify-between">
+                            <span className="text-2xl font-bold text-gray-900">${parseFloat(collection.price).toFixed(2)}</span>
+                            <Link
+                              to={`/shop/collections/${collection.slug}`}
+                              className="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-6 py-2 rounded-full font-medium hover:from-rose-600 hover:to-pink-600 transition-all duration-200"
+                            >
+                              View Collection
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">Love Letters Collection</h3>
-                    <p className="text-gray-600 mb-4">Express your deepest feelings with our romantic handwritten letters.</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-2xl font-bold text-gray-900">$29.99</span>
-                      <Link
-                        to="/shop"
-                        className="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-6 py-2 rounded-full font-medium hover:from-rose-600 hover:to-pink-600 transition-all duration-200"
-                      >
-                        Add to Cart
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Product 2 */}
-                <div className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2">
-                  <div className="relative">
-                    <img
-                      src="/images/collections/finding-joy.png"
-                      alt="Everyday Joy Letter - Because Joy Lives in the Little Things"
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute top-4 left-4 bg-amber-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                      Popular
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">Thank You Notes</h3>
-                    <p className="text-gray-600 mb-4">Show appreciation with elegant, personalized thank you letters.</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-2xl font-bold text-gray-900">$19.99</span>
-                      <Link
-                        to="/shop"
-                        className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-2 rounded-full font-medium hover:from-amber-600 hover:to-orange-600 transition-all duration-200"
-                      >
-                        Add to Cart
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Product 3 */}
-                <div className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2">
-                  <div className="relative">
-                    <img
-                      src="/images/collections/grief-support.png"
-                      alt="Grief Support Letter - Words When Silence Feels Heavy"
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute top-4 left-4 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                      Heartfelt
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">Sympathy Letters</h3>
-                    <p className="text-gray-600 mb-4">Offer comfort and support during difficult times with compassionate words.</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-2xl font-bold text-gray-900">$24.99</span>
-                      <Link
-                        to="/shop"
-                        className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-6 py-2 rounded-full font-medium hover:from-purple-600 hover:to-indigo-600 transition-all duration-200"
-                      >
-                        Add to Cart
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
+                );
+              })()}
               <div className="text-center mt-12">
                 <Link
                   to="/shop"
