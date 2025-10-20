@@ -5,15 +5,6 @@ module.exports = {
 			sans: ['Inter', 'sans-serif'],
 		},
 		extend: {
-			keyframes: {
-				marquee: {
-					'0%': { transform: 'translateX(0)' },
-					'100%': { transform: 'translateX(-50%)' }
-				}
-			},
-			animation: {
-				marquee: 'marquee 60s linear infinite'
-			},
 			fontFamily: {
 				'a-bee-zee': 'A Bee Zee',
 				'ad-la-m-display': 'Ad La M Display',
